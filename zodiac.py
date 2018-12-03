@@ -2,19 +2,23 @@ from datetime import datetime
 
 def zodiac_input():
     """Should prompt for user input(no year, just mmdd), validate it and return the value if correct"""
-    zodiac_dob = input('Please input your date of birth (mmdd): ')
+    zodiac_dob = ""
+    date_input = input('Please input your date of birth (mmdd): ')
+
     try:
-        if zodiac_dob != datetime.strptime(zodiac_dob, "%m%d").strftime('%m%d'):
+        if date_input != datetime.strptime(date_input, "%m%d").strftime('%m%d'):
             raise ValueError
+        zodiac_dob = date_input
         return zodiac_dob
     except ValueError:
         print("Incorrect date format, should be MMDD")
-        zodiac_input()
+        return zodiac_input()
     pass
 
 def get_zodiac():
     """Should return a zodiac based on a date."""
     date = zodiac_input()
+    print(date)
     pass
 
 if __name__ == "__main__":
