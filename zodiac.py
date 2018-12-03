@@ -1,5 +1,5 @@
 def zodiac_input():
-    """Should prompt for user input, validate it and return the value if correct"""
+    """Should prompt for user input(no year, just mmdd), validate it and return the value if correct"""
     pass
 
 def get_zodiac():
