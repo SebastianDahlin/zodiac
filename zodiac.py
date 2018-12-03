@@ -18,7 +18,6 @@ def zodiac_input():
 def get_zodiac():
     """Should return a zodiac based on a date."""
     date = zodiac_input()
-    print(date)
     pass
 
 if __name__ == "__main__":
