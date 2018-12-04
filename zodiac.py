@@ -17,9 +17,8 @@ def zodiac_input():
         return zodiac_input()
     pass
 
-def get_zodiac():
+def get_zodiac(date):
     """Should return a zodiac based on a date."""
-    date = zodiac_input()
     date = datetime.strptime(date, "%m%d")
     for zodiac in ZODIAC_LIST:
         start_date = datetime.strptime(zodiac[1], "%m%d")
@@ -28,4 +27,5 @@ def get_zodiac():
             return(zodiac[0])
 
 if __name__ == "__main__":
-    print(get_zodiac())
+    date = zodiac_input()
+    get_zodiac(date)

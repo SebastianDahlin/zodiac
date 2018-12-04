@@ -12,17 +12,11 @@ def test_zodiac_input(monkeypatch):
         date = zodiac_input()
         assert date == '0101'
 
-def test_get_zodiac(monkeypatch):
-    with monkeypatch.context() as m:
-        ## First Test
-        m.setattr('builtins.input', lambda x: "1231")
-        zodiac = get_zodiac()
-        assert zodiac == 'Capricornus'
-        ## Second Test
-        m.setattr('builtins.input', lambda x: "0101")
-        zodiac = get_zodiac()
-        assert zodiac == 'Capricornus'
-        ## Third Test
-        m.setattr('builtins.input', lambda x: "0810")
-        zodiac = get_zodiac()
-        assert zodiac == 'Leo'
+def test_get_zodiac():
+    zodiac = get_zodiac("1231")
+    assert zodiac == 'Capricornus'
+    zodiac = get_zodiac("0101")
+    assert zodiac == 'Capricornus'
+    zodiac = get_zodiac("0915")
+    assert zodiac == 'Virgo'
+    assert zodiac != 'Leo'
