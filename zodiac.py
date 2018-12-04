@@ -1,7 +1,6 @@
 from datetime import datetime
-import pprint
 
-ZODIAC_LIST = [['Sagittarius', 1, 19], ['Capricornus', 20, 47], ['Aquarius', 48, 71], ['Pisces', 72, 109], ['Aries', 110, 134], ['Taurus', 135, 171], ['Gemini', 172, 202], ['Cancer', 203, 222], ['Leo', 223, 259], ['Virgo', 260, 304], ['Libra', 305, 327], ['Scorpius', 328, 334], ['Ophiuchus', 335, 352], ['Sagittarius', 353, 365]]
+ZODIAC_LIST = [['Capricornus', '0101', '0119'], ['Aquarius', '0120', '0218'], ['Pisces', '0219', '0320'], ['Aries', '0321', '0419'], ['Taurus', '0420', '0520'], ['Gemini', '0521', '0620'], ['Cancer', '0621', '0722'], ['Leo', '0723', '0822'], ['Virgo', '0823', '0922'], ['Libra', '0923', '1022'], ['Scorpius', '1023', '1121'], ['Sagittarius', '1122', '1221'], ['Capricornus', '1222', '1231']]
 
 def zodiac_input():
     """Should prompt for user input(no year, just mmdd), validate it and return the value if correct"""
@@ -21,14 +20,12 @@ def zodiac_input():
 def get_zodiac():
     """Should return a zodiac based on a date."""
     date = zodiac_input()
-    mm, dd, day_count, day_to_lookup = int(date[0:2]), int(date[2:4]), 0, 0
-    month_list = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-    for index, month in enumerate(month_list):
-        for day in range(1, month + 1):
-            day_count += 1
-            if mm == index + 1 and dd == day:
-                day_to_lookup = day_count
-    return [item for item in ZODIAC_LIST if item[1] <= day_to_lookup and item[2] >= day_to_lookup][0][0]
+    date = datetime.strptime(date, "%m%d")
+    for zodiac in ZODIAC_LIST:
+        start_date = datetime.strptime(zodiac[1], "%m%d")
+        end_date = datetime.strptime(zodiac[2], "%m%d")
+        if start_date <= date and end_date >= date:
+            return(zodiac[0])
 
 if __name__ == "__main__":
     print(get_zodiac())
