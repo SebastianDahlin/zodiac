@@ -13,10 +13,10 @@ def test_zodiac_input(monkeypatch):
         assert date == '0101'
 
 def test_get_zodiac():
-    zodiac = get_zodiac("1231")
+    zodiac = get_zodiac(1231)
     assert zodiac == 'Capricornus'
-    zodiac = get_zodiac("0101")
+    zodiac = get_zodiac(101)
     assert zodiac == 'Capricornus'
-    zodiac = get_zodiac("0915")
+    zodiac = get_zodiac(915)
     assert zodiac == 'Virgo'
     assert zodiac != 'Leo'
