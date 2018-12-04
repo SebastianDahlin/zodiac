@@ -28,4 +28,4 @@ def get_zodiac(date):
 
 if __name__ == "__main__":
     date = zodiac_input()
-    get_zodiac(date)
+    print(get_zodiac(date))
