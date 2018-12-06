@@ -1,5 +1,6 @@
 from datetime import datetime
 import sqlite3
+import csv
 
 ZODIAC_LIST = [['Capricornus', 101, 119], ['Aquarius', 120, 218], ['Pisces', 219, 320], ['Aries', 321, 419],
                 ['Taurus', 420, 520], ['Gemini', 521, 620], ['Cancer', 621, 722], ['Leo', 723, 822],
@@ -12,11 +13,11 @@ def create_table():
     c.execute('CREATE TABLE IF NOT EXISTS zodiac_traits(keyword TEXT, traits TEXT)')
 
 def data_entry():
-    """Enters stuff into the database"""
-    c.execute("REPLACE INTO zodiac_traits VALUES('Capricornus', 'You sir, are an idiot!')")
-    c.execute("REPLACE INTO zodiac_traits VALUES('Aquarius', 'You sir, are an idiot!')")
-    c.execute("REPLACE INTO zodiac_traits VALUES('Pisces', 'You sir, are an idiot!')")
-    c.execute("REPLACE INTO zodiac_traits VALUES('Aries', 'You sir, are an idiot!')")
+    """Enters stuff into the database."""
+    with open('raw_data.csv') as csvfile:
+        readCSV = csv.reader(csvfile, delimiter=',')
+        for row in readCSV:
+            c.execute("REPLACE INTO zodiac_traits VALUES(?, ?)",(row[0], row[1]))
     conn.commit()
 
 def read_from_db(zodiac):
