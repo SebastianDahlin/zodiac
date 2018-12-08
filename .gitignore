@@ -1,3 +1,9 @@
 .vscode/settings.json
 __pycache__/test_zodiac.cpython-37-PYTEST.pyc
 __pycache__/zodiac.cpython-37.pyc
+scraper_test.py
+aries.html
+raw_data_test.csv
+__pycache__/test_zodiac.cpython-36-PYTEST.pyc
+.cache/v/cache/lastfailed
+__pycache__/zodiac.cpython-36.pyc
