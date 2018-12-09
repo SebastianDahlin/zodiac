@@ -33,7 +33,7 @@ def scrape_traits(scrape):
     for s in scrape:
         zodiac_sign = [] ##Placeholder for key:value pair per zodiac sign.
         zodiac_traits = "" ##Placeholder for scraped zodiac sign.
-        html = urlopen(s[1])
+        html = urlopen(s[1]) ## Url = 2nd element from 'ZODIAC_SCRAPE' list.
         bsObj = BeautifulSoup(html.read(),'html.parser');
         zodiac_sign.append(s[0]) ## Append 1st element from 'ZODIAC_SCRAPE' list item i.e. "Aries".
         for traits in bsObj.find_all(["h2", "h3"]):
@@ -53,6 +53,7 @@ def scrape_traits(scrape):
     return traits_csv
 
 def write_csv(traits,fn):
+    """Writes the traits_csv structure to 'raw_data.csv', overwriting previous contents."""
     with open(fn, mode='w') as zodiac_file:
         zodiac_writer = csv.writer(zodiac_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
