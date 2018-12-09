@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 
 raw_data_csv = "raw_data.csv"
 
+## List of Zodiac signs, web page to scrape and keywords to find the data to scrape.
 ZODIAC_SCRAPE = [["Capricornus", "https://www.horoscope.com/zodiac-signs/capricorn", ["Capricorn Greatest Gifts", "Capricorn Greatest Challenges", "Capricorn Secret Weapon"]],
                 ["Aquarius", "https://www.horoscope.com/zodiac-signs/aquarius", [" Aquarius Zodiac Sign"]],
                 ["Pisces", "https://www.horoscope.com/zodiac-signs/pisces", [" Pisces Zodiac Sign"]],
@@ -18,7 +19,8 @@ ZODIAC_SCRAPE = [["Capricornus", "https://www.horoscope.com/zodiac-signs/caprico
                 ["Libra", "https://www.horoscope.com/zodiac-signs/libra", ["Libra's Greatest Gifts", "Libra's Greatest Challenges", "Libra's Secret Weapon"]],
                 ["Scorpius", "https://www.horoscope.com/zodiac-signs/scorpio", ["Scorpio's Greatest Gifts", "Scorpio's Greatest Challenges", "Scorpio's Secret Weapon"]],
                 ["Sagittarius", "https://www.horoscope.com/zodiac-signs/sagittarius", ["Sagittarius Greatest Gifts", "Sagittarius Greatest Challenges", "Sagittarius Secret Weapon"]]]
-                
+
+## List of Zodiac signs and their dates in integer form.
 ZODIAC_LIST = [['Capricornus', 101, 119], ['Aquarius', 120, 218], ['Pisces', 219, 320], ['Aries', 321, 419],
                 ['Taurus', 420, 520], ['Gemini', 521, 620], ['Cancer', 621, 722], ['Leo', 723, 822],
                 ['Virgo', 823, 922], ['Libra', 923, 1022], ['Scorpius', 1023, 1121], ['Sagittarius', 1122, 1221], ['Capricornus', 1222, 1231]]
@@ -26,13 +28,14 @@ conn = sqlite3.connect('zodiac.db') ## Create a sqlite3 connect object
 c = conn.cursor() ## Create a cursor object
 
 def scrape_traits(scrape):
-    traits_csv = []
+    """Scrape horoscope.com for zodiac sign traits. If successful, returns a csv file structure."""
+    traits_csv = [] ##Placeholder for csv structure list.
     for s in scrape:
-        zodiac_sign = []
-        zodiac_traits = ""
+        zodiac_sign = [] ##Placeholder for key:value pair per zodiac sign.
+        zodiac_traits = "" ##Placeholder for scraped zodiac sign.
         html = urlopen(s[1])
         bsObj = BeautifulSoup(html.read(),'html.parser');
-        zodiac_sign.append(s[0])
+        zodiac_sign.append(s[0]) ## Append 1st element from 'ZODIAC_SCRAPE' list item i.e. "Aries".
         for traits in bsObj.find_all(["h2", "h3"]):
             if traits.get_text() in s[2]:
                 zodiac_traits += traits.get_text()+"/n"
@@ -103,8 +106,8 @@ def get_zodiac(date):
     return z[0][0]
     
 if __name__ == "__main__":
-    csv_file = scrape_traits(ZODIAC_SCRAPE)
-    write_csv(csv_file,raw_data_csv)
+    csv_file = scrape_traits(ZODIAC_SCRAPE) ## Scape web page for zodiac sign traits. Returns csv structure on success.
+    write_csv(csv_file,raw_data_csv) ## Write the scraped csv structure into "raw_data.csv".
     date = int(zodiac_input()) ## Get and validate user input.
     zodiac = get_zodiac(date) ## Fetch the zodiac sign.
     create_table() ## If zodiac.db does not exist, create it.
