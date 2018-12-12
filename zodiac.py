@@ -45,7 +45,7 @@ def scrape_traits(scrape):
                     if elem.name == 'p':
                         found = True
                         zodiac_traits += elem.get_text()
-                        zodiac_sign.append(zodiac_traits)
+                        zodiac_sign.append(zodiac_traits.encode('utf8'))
                         #print(elem.get_text())
                     if found == True:
                         break
