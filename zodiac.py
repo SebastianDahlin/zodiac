@@ -45,16 +45,17 @@ def scrape_traits(scrape):
                     if elem.name == 'p':
                         found = True
                         zodiac_traits += elem.get_text()
-                        zodiac_sign.append(zodiac_traits.encode('utf8'))
+                        #zodiac_sign.append(zodiac_traits.encode('utf8'))
                         #print(elem.get_text())
                     if found == True:
                         break
+        zodiac_sign.append(zodiac_traits.encode('utf8'))
         traits_csv.append(zodiac_sign)
     return traits_csv
 
 def write_csv(traits,fn):
     """Writes the traits_csv structure to 'raw_data.csv', overwriting previous contents."""
-    with open(fn, mode='w') as zodiac_file:
+    with open(fn, mode='w', newline='') as zodiac_file:
         zodiac_writer = csv.writer(zodiac_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
         for z in traits:
